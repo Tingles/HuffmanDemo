@@ -1,0 +1,3 @@
+--file: Huffman/MakeCode.hs
+--
+--Huffman coding in Haskell.

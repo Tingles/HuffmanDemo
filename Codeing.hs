@@ -1,0 +1,4 @@
+-- file: Huffman/Codeing.hs
+--
+-- Huffman coding in Haskell
+-- The top-level functions for encoding and decoding.

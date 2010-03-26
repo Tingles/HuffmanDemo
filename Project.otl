@@ -1,0 +1,47 @@
+Huffman Minimum Redundancy Codes
+
+	Encoding
+		model dependant.
+		byte strings.			
+	Decoding
+	Typical use case:
+		construct frequency table
+			'freq'
+				-> determin frequencies of elements in given list.
+				-> table maintaining count of element occurances.
+				-> ['a','b','c','e','a','a','b','c'] gives [('a',3),('b',2),('c',2),('e',1)]
+				Consider: 
+					iterate and update data,
+					vs sorting and determining groups length.
+
+				charFrequencies :: String -> [(Char, Int)]
+				charFrequencies s = map freq groups 
+				     where 
+				        groups = Data.List.group ( sort s )
+				        freq g = (head g, length g)
+			
+		construct decoding tree from frequency table
+			'makeHTree'
+		construct the encoding table from decoding tree
+			'makeHTable'
+			
+	Once encoding table is available:
+		To encode a message
+
+			encode :: Table -> String -> HCode
+			encode tbl msg 
+			    = concat (map (lookupTable tbl) msg)
+				
+			lookupTable :: Table -> Char -> HCode
+			lookupTable [] c
+			    = error ("lookupTable: No " ++ [c])
+			lookupTable ((ch,n):tb) c
+			    | (ch == c)  = n
+			    | otherwise  = lookupTable tb c 
+
+			-> look up character code in table.
+			-> replace character in message with code
+			-> concat codes into a message
+		To decode a message
+			-> type Hcode = [Bit]
+			-> type Table = [ (Char,Hcode) ]
